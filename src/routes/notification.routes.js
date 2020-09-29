@@ -1,7 +1,7 @@
 const express = require('express');
 const { notification } = require('../controllers');
-const { commons } = require('../../helpers');
-const group_customersFile = './data/group_customers.json';
+const { commons } = '../../helpers';
+const groupCustomersFile = '../data/groupCustomers.json';
 const Joi = require('joi');
 const router = express.Router();
 /*!
@@ -57,7 +57,7 @@ router.post('/', async (req, res) => {
     })
   } else {
     if (req.body.type === 'group') {
-      await commons.findRecordById(group_customersFile, req.body.group_id, 'byGroupId')
+      await commons.findRecordById(groupCustomersFile, req.body.group_id, 'byGroupId')
         .then(customers => {
           (async () => {
             let errorArray = [];

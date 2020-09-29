@@ -1,4 +1,4 @@
-const smsFile = './data/sms.json'
+const smsFile = '../data/sms.json';
 const { commons } = require('../../helpers');
 
 // Add sms against customer

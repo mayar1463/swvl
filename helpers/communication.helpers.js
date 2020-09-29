@@ -1,7 +1,10 @@
 const fs = require('fs');
-const smsFile = './data/sms.json';
+const smsFile = '../data/sms.json';
 require('dotenv').config();
 let intervalID = "";
+let checkMinute=0;
+let currentMinute=0;
+let smsCounter=1;
 //const fcmadmin = require("firebase-admin");
 //const fcemail = require("firebase-admin");
 
@@ -14,6 +17,8 @@ let intervalID = "";
 
 
 const startInterVal = () => {
+    let d = new Date();
+    currentMinute = d.getMinutes();
     intervalID = setInterval(getPhoneNumber, 5000);
 }
 
@@ -23,6 +28,9 @@ const getPhoneNumber = async () => {
         (dataArray != '') ? dataArray = JSON.parse(dataArray) : dataArray = [];
         if (dataArray.length > 0) {
             dataArray.slice(0, process.env.PERMINUTECALL).map((currElement, index) => {
+                smsCounter+=index;
+                // console.log("index____",index);
+                // console.log("smsCounter",smsCounter);
                 sendSMS(currElement.phone, currElement.promocode)
                 dataArray.shift();
             });

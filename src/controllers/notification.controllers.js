@@ -1,6 +1,6 @@
 'user strict';
-const notificationsFile = './data/notifications.json';
-const customerFile = './data/customers.json';
+const notificationsFile = '../data/notifications.json';
+const customerFile = '../data/customers.json';
 const { commons } = require('../../helpers');
 
 
