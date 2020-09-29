@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
+const swaggerUi = require('swagger-ui-express');
 const morgan = require('morgan');
 const fs = require('fs');
 const app = express();
@@ -10,6 +11,14 @@ const limiter = rateLimit({
   windowMs: 5 * 60 * 1000, // 5 minutes
   max: 100 // limit each IP to 100 requests per windowMs
 });
+
+var options = {
+  swaggerOptions: {
+    url: 'http://petstore.swagger.io/v2/swagger.json'
+  }
+}
+ 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(null, options));
 
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
 app.use(express.json());

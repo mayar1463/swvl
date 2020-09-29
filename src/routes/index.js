@@ -3,8 +3,6 @@ const { auth } = require('../middlewares/auth');
 const router = express.Router()
 
 router.all('/', (req, res) => {
-    console.log(process.env.DBHOST);
-    io.emit("socketToMe", "users");
     res.status(200).json({ message: 'Wellcome !' })
 })
 
