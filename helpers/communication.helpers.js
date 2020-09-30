@@ -63,6 +63,15 @@ const clearIntervalCall = async (id) => {
 
 
 const sendNotification = (token, msg, type) => {
+    // send push notification using fcm or APNS
+    // let notifications = [
+    //     new BasicNotification(token, msg),
+    //   ]
+    // try {
+    //     await client.send(sn)
+    //   } catch (err) {
+    //     console.error(err.reason)
+    //   }
     return true;
 }
 
@@ -74,6 +83,8 @@ const sendNotification = (token, msg, type) => {
  * this method is for send email
  */
 const sendSMS = (phone, promocode) => {
+    // third part module to send sms
+    //async smsService.sendSMS(phone,promocode);
     return true;
 }
 

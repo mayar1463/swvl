@@ -24,7 +24,7 @@ const saveData = (filename, data) => {
     *  2: id is either id,phone and group_id
     *  3: type diffrentiat the table
  */
-const findRecordById = (filename, id,type=null) => {
+const findRecordById = (filename, id, type = null) => {
     return new Promise((resolve, reject) => {
         try {
             fs.readFile(filename, 'utf8', (err, dataArray) => {
@@ -32,34 +32,32 @@ const findRecordById = (filename, id,type=null) => {
                     reject(err)
                 }
                 (dataArray != '') ? dataArray = JSON.parse(dataArray) : dataArray = [];
-                let row ='';
-                if(type==='byCustomerId')
-                {
+                let row = '';
+                if (type === 'byCustomerId') {
                     row = dataArray.filter(r => {
                         if (r.customer_id == id) return r;
                     }); // this check is to find notifications or customer by id
                 }
-                else if(type==='byPromoCode'){
+                else if (type === 'byPromoCode') {
                     row = dataArray.find(r => r.code == id) // // this check promo code
                 }
-                else if(type==='byGroupId'){
+                else if (type === 'byGroupId') {
                     row = dataArray.filter(r => {
                         if (r.group_id == id) return r;
                     }); // // this check is to find group_id
+                    console.log(row);
                 }
                 else {
-                     row = dataArray.find(r => r.id == id) // this check is to find by id
+                    row = dataArray.find(r => r.id == id) // this check is to find by id
                 }
-                if (row && row.length) {
-                    resolve(row)
-                  }
-                else if (Object.keys(row).length > 0) {
-                    resolve(row)
-                } else {
+                if ((!row || 0 === row.length)) {
                     reject({
                         message: 'No Record found!',
                         status: 404
                     })
+                }
+                else {
+                    resolve(row);
                 }
             });
         }

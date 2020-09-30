@@ -62,29 +62,27 @@ router.post('/', async (req, res) => {
       })
     } else {
       if (req.body.type === 'group') {
-        await commons.findRecordById(groupCustomersFile, req.body.group_id, 'byGroupId')
-          .then(customers => {
-            (async () => {
-              let errorArray = [];
-              let successArray = [];
-              for (i = 0; i < customers.length; i++) {
-                let newNotification = {};
-                newNotification.message = req.body.message;
-                newNotification.customer_id = customers[i].customer_id;
-                await notification.addNotification(newNotification)
-                  .then(newNotification => {
-                    successArray.push(newNotification.id);
-                  })
-              }
-              res.status(201).json({
-                message: `The Notification has been send`,
-                ids: successArray
-              })
-            })();
-          })
-          .catch(err => {
-            res.status(err.status || 500).json({ message: err.message })
-          })
+        await commons.findRecordById(groupCustomersFile, req.body.group_id, 'byGroupId').then(customers => {
+          (async () => {
+            let errorArray = [];
+            let successArray = [];
+            for (i = 0; i < customers.length; i++) {
+              let newNotification = {};
+              newNotification.message = req.body.message;
+              newNotification.customer_id = customers[i].customer_id;
+              await notification.addNotification(newNotification)
+                .then(newNotification => {
+                  successArray.push(newNotification.id);
+                })
+            }
+            res.status(201).json({
+              message: `The Notification has been send`,
+              ids: successArray
+            })
+          })();
+        }).catch(err => {
+          res.status(err.status || 500).json({ message: err.message })
+        })
 
       } else {
         let newNotification = req.body;
