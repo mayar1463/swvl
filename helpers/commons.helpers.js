@@ -39,8 +39,8 @@ const findRecordById = (filename, id,type=null) => {
                         if (r.customer_id == id) return r;
                     }); // this check is to find notifications or customer by id
                 }
-                else if(type==='byPhone'){
-                    row = dataArray.find(r => r.phone == id) // // this check is to find phone number
+                else if(type==='byPromoCode'){
+                    row = dataArray.find(r => r.code == id) // // this check promo code
                 }
                 else if(type==='byGroupId'){
                     row = dataArray.filter(r => {

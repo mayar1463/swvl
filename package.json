@@ -1,7 +1,7 @@
 {
-  "name": "demo",
+  "name": "notifications",
   "version": "1.0.0",
-  "description": "This is app for creating crud api using node,file system, express and mysql",
+  "description": "This is Notification Sending Module",
   "main": "app.js",
   "scripts": {
     "test": "mocha tests/*.js --exit || true",
@@ -26,11 +26,7 @@
     "firebase-admin": "^9.2.0",
     "helmet": "^3.21.1",
     "joi": "^17.2.1",
-    "jsonwebtoken": "^8.5.1",
-    "mysql": "^2.17.1",
-    "request": "^2.88.0",
-    "socket.io": "^2.3.0",
-    "swagger-ui-express": "^4.1.4"
+    "mysql": "^2.17.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

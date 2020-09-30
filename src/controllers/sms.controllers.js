@@ -25,7 +25,7 @@ const addSMS = async (phone, promocode) => {
                 } else {
                     resolve(true);
                 }
-            })
+            }) .catch(err => reject(err))
     })
 }
 

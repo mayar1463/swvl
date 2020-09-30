@@ -1,10 +1,11 @@
 const fs = require('fs');
 const smsFile = '../data/sms.json';
 require('dotenv').config();
+let d1 = new Date();
 let intervalID = "";
-let checkMinute=0;
-let currentMinute=0;
-let smsCounter=1;
+let checkMinute = d1.getMinutes();;
+let currentMinute = 0;
+let smsCounter = 0;
 //const fcmadmin = require("firebase-admin");
 //const fcemail = require("firebase-admin");
 
@@ -17,36 +18,42 @@ let smsCounter=1;
 
 
 const startInterVal = () => {
-    let d = new Date();
-    currentMinute = d.getMinutes();
     intervalID = setInterval(getPhoneNumber, 5000);
 }
 
 
 const getPhoneNumber = async () => {
-    fs.readFile(smsFile, 'utf8', (err, dataArray) => {
-        (dataArray != '') ? dataArray = JSON.parse(dataArray) : dataArray = [];
-        if (dataArray.length > 0) {
-            dataArray.slice(0, process.env.PERMINUTECALL).map((currElement, index) => {
-                smsCounter+=index;
-                // console.log("index____",index);
-                // console.log("smsCounter",smsCounter);
-                sendSMS(currElement.phone, currElement.promocode)
-                dataArray.shift();
-            });
-            fs.writeFileSync(smsFile, JSON.stringify(dataArray), 'utf8', (err) => {
-                if (err) {
-                    return false
-                } else {
-                    return true
+    let d = new Date();
+    currentMinute = d.getMinutes();
+    console.log('____timer start__smsCounter____', smsCounter,"_checkMinute_",checkMinute,"_currentMinute__",currentMinute);
+    if (checkMinute === currentMinute && smsCounter < process.env.PERMINUTECALL)  {
+            console.log("____Read Data____");
+            fs.readFile(smsFile, 'utf8', (err, dataArray) => {
+                (dataArray != '') ? dataArray = JSON.parse(dataArray) : dataArray = [];
+                if (dataArray.length > 0) {
+                    dataArray.slice(0, (process.env.PERMINUTECALL - smsCounter)).map((currElement, index) => {
+                        smsCounter++;
+                        sendSMS(currElement.phone, currElement.promocode)
+                        dataArray.shift();
+                    });
+                    fs.writeFileSync(smsFile, JSON.stringify(dataArray), 'utf8', (err) => {
+                        if (err) {
+                            return false
+                        } else {
+                            return true
+                        }
+                    });
+                }
+                else {
+                    console.log('clear timer')
+                    clearIntervalCall(intervalID)
                 }
             });
-        }
-        else {
-            clearIntervalCall(intervalID)
-        }
-
-    });
+    } else if (checkMinute != currentMinute) {
+        checkMinute = currentMinute;
+        smsCounter = 0;
+        console.log('set the check values');
+    }
 }
 
 
@@ -56,6 +63,7 @@ const clearIntervalCall = async (id) => {
 
 
 const sendNotification = (token, msg, type) => {
+    return true;
 }
 
 
