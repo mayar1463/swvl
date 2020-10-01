@@ -7,6 +7,7 @@
 # Getting started
    
     . Clone this repo
+    . select apis folder
     . npm install
     . npm start
     . npm test
@@ -29,17 +30,17 @@
 
 # Application Structure
 
-    . apis/app.js - The entry point to our application.
-    . apis/bin/ - app configuration file.
-    . apis/routes/ - This folder contains the route definitions for our API.
-    . apis/controllers/ - This folder responsible for controlling the flow of the application execution. 
-    . apis/helper/ - helping and common methods
-    . apis/tests/ - Unit testing
-    . apis/postman_collection/ -  Postman collection to test APIs.
-    . apis/Dockerfile - For dockerization the app.
-    . apis/access.log - This for logging the request.
+    . swvl/apis/app.js - The entry point to our application.
+    . swvl/apis/bin/ - app configuration file.
+    . swvl/apis/routes/ - This folder contains the route definitions for our API.
+    . swvl/apis/controllers/ - This folder responsible for controlling the flow of the application execution. 
+    . swvl/apis/helper/ - helping and common methods
+    . swvl/apis/tests/ - Unit testing
+    . swvl/apis/postman_collection/ -  Postman collection to test APIs.
+    . swvl/apis/Dockerfile - For dockerization the app.
+    . swvl/apis/access.log - This for logging the request.
 
 #  Data store
-        . data/ - data is store in this folder.
+        . swvl/data/ - data is store in this folder.
 
   
