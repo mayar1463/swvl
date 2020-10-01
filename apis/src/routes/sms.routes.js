@@ -12,7 +12,7 @@ router.post('/', async (req, res) => {
   try {
     const schema = Joi.object({
       phones: Joi.array().items(Joi.object({
-        phone: Joi.number().required()
+        phone: Joi.string().required()
       })).required(),
       promocode: Joi.string().regex(/[0-9]/, { name: 'promocode' }).length(6).required()
     });
