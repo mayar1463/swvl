@@ -14,8 +14,8 @@
     
 # Build the Docker image
 
-    . docker build -t addform-assignment .
-    . docker run -t -p 9000:3000 addform-assignment
+    . docker build -t swvl .
+    . docker run -t -p 9000:3000 swvl
 
 # Dependencies
 
